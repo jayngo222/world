@@ -1,0 +1,540 @@
+/* --- CẤU HÌNH CƠ BẢN (DESKTOP FIRST) --- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body { 
+    background-color: #000; 
+    color: #fff; 
+    font-family: 'Inter', sans-serif; 
+    overflow: hidden; /* Desktop ẩn thanh cuộn để JS xử lý */
+    width: 100vw;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+/* --- HEADER --- */
+header {
+    position: fixed; top: 0; left: 0; width: 100%; 
+    height: 65px; 
+    display: flex; align-items: center; z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.2); 
+}
+
+.header-left {
+    width: 65px; height: 100%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; border-right: 0.5px solid rgba(255, 255, 255, 0.2); z-index: 20; position: relative;
+}
+.menu-svg { width: 18px; height: auto; display: block; }
+.menu-svg line { stroke: #fff; stroke-width: 2px; }
+
+.header-center {
+    flex: 1; height: 100%; position: relative;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.world-bg-wrapper {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; 
+    justify-content: flex-start; gap: 0; 
+    z-index: 1; opacity: 0.5; white-space: nowrap; 
+}
+.world-text {
+    font-family: 'Bodoni Moda', serif; 
+    font-size: 43px; 
+    line-height: 1; 
+    font-weight: 400;
+    color: #262626; white-space: nowrap; user-select: none; 
+    padding: 0 15px; 
+}
+.logo-wrapper {
+    position: relative; z-index: 10; width: auto; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+}
+.logo-img { 
+    width: 272px; height: 40px; 
+    object-fit: contain; filter: brightness(0) invert(1); cursor: pointer; 
+    margin-top: -5px; 
+}
+
+.header-right {
+    width: 195px; height: 100%; flex-shrink: 0;
+    display: flex; align-items: center; border-left: 0.5px solid rgba(255, 255, 255, 0.2);
+    z-index: 20; position: relative;
+}
+.right-item-wrapper {
+    height: 100%; flex: 1; display: flex; align-items: center; justify-content: center;
+}
+.right-item-wrapper:not(:last-child) { border-right: 0.5px solid rgba(255, 255, 255, 0.2); }
+.icon-search, .icon-light { filter: brightness(0) invert(1); cursor: pointer; opacity: 1; margin-top: 6px; }
+.icon-search { width: 18px; height: 18px; } 
+.icon-light { width: 20px; height: 20px; }
+.lang { width: auto; padding: 0 10px; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 1px; color: #fff; padding-top: 6px; }
+
+/* --- CONTAINER TỔNG (DESKTOP) --- */
+#scroller-container {
+    position: absolute; top: 0; left: 0; width: 100%;
+    transition: transform 0.1s ease-out; will-change: transform;
+    transform-origin: 0 0;
+}
+
+/* --- STYLE CHUNG --- */
+.slide-split { width: 100vw; height: 100vh; flex-shrink: 0; display: flex; }
+
+.w50-col { 
+    width: 50vw; height: 100vh; position: relative; overflow: hidden; background-color: #000; 
+    display: flex; flex-direction: column; 
+    padding: 105px 66px 40px; 
+}
+
+.w50-col img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.col-content { 
+    position: absolute; bottom: 0; 
+    left: 66px; right: 66px; 
+    z-index: 10; padding: 0 50px 50px 50px; 
+}
+
+.special-hero-padding {
+    padding: 39px 33px 40px !important; 
+}
+
+.special-hero-content {
+    left: 33px !important;
+    right: 33px !important;
+}
+
+.base-item { display: inline-block; font-size: 14px; font-weight: 600; letter-spacing: 2px; color: #fff; padding: 8px 20px; cursor: pointer; transition: 0.2s; margin-right: -0.5px; }
+.style-sides-only { border: 0.5px solid transparent; border-left-color: rgba(255, 255, 255, 0.4); border-right-color: rgba(255, 255, 255, 0.4); }
+.style-sides-only:hover { border-color: #fff; z-index: 1; position: relative; }
+.style-full-box { border: 0.5px solid #fff; z-index: 2; position: relative; }
+.meta-info { display: flex; align-items: center; margin-bottom: 25px; font-weight: 500; color: #ccc; font-size: 14px; letter-spacing: 2px; }
+.meta-category { margin-right: 15px; }
+.headline { font-family: 'Bodoni Moda', serif; font-size: 2rem; line-height: 1.2; font-weight: 400; color: #fff; max-width: 100%; }
+.bottom-gradient { position: absolute; bottom: 0; left: 0; width: 100%; height: 85%; background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.95) 20%, rgba(0,0,0,0.6) 60%, transparent 100%); pointer-events: none; z-index: 5; }
+.vertical-item { width: 100vw; margin-left: 100vw; background-color: #000; position: relative; }
+
+/* --- CONTENT SECTION --- */
+#horizontal-section { display: flex; width: 200vw; height: 100vh; }
+.slide-video { width: 100vw; height: 100vh; flex-shrink: 0; position: relative; border-right: 20px solid #000; }
+.slide-video video { width: 100%; height: 100%; object-fit: cover; }
+.video-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,0.6) 75%, rgba(0,0,0,0.95) 100%); z-index: 10; pointer-events: none; }
+.hero-text { position: absolute; bottom: 80px; left: 60px; z-index: 20; }
+.big-title { font-family: 'Bodoni Moda', serif; font-size: 3.5rem; line-height: 1.1; margin-bottom: 30px; max-width: 600px; }
+.btn { padding: 14px 35px; border: 0.5px solid #fff; color: #fff; text-decoration: none; text-transform: uppercase; font-size: 10px; letter-spacing: 2px; font-weight: 600; background: rgba(0,0,0,0.3); transition: 0.3s; backdrop-filter: blur(5px); }
+.btn:hover { background: #fff; color: #000; }
+
+.layout-bag-style { display: flex; min-height: auto; padding: 30px 0; }
+.bag-left-col { width: 50%; display: flex; flex-direction: column; padding: 0 66px; }
+
+.filter-nav { display: flex; align-items: center; flex-wrap: wrap; margin-bottom: 60px; width: 100%; }
+.filter-item-wrapper { display: flex; align-items: center; }
+.bag-img-container { width: 100%; }
+.bag-img-container img { width: 100%; height: auto; object-fit: contain; display: block; }
+
+.bag-right-col { 
+    width: 50%; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+    align-items: flex-start; 
+    padding: 0 66px 0; 
+}
+
+.bag-label-row { margin-bottom: 15px; }
+.bag-date { font-size: 16px; color: #ccc; font-weight: 400; letter-spacing: 1px; margin-bottom: 25px; font-family: 'Bodoni Moda', serif; }
+.bag-title { font-family: 'Bodoni Moda', serif; font-size: 3rem; line-height: 1.1; font-weight: 400; color: #fff; }
+
+.layout-split-style { height: 100vh; display: flex; }
+
+/* --- PHẦN GRID PHỨC TẠP --- */
+.layout-complex-grid { height: 100vh; width: 100vw; display: flex; padding: 65px 0 30px; }
+.grid-col-left { width: 50%; height: 100%; display: flex; flex-direction: column; border-right: 1px solid #000; padding: 0 66px; gap: 0; }
+
+.grid-row-top { flex: 1.5; width: 100%; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+.grid-row-bottom { flex: 1; width: 100%; display: flex; gap: 0; flex-direction: row; position: relative; overflow: hidden; margin-top: 20px; }
+
+.grid-sub-col-left { 
+    flex: 0 0 50%; 
+    width: 50%;
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+    overflow: hidden; 
+    padding-right: 10px; 
+}
+
+.grid-sub-col-right { 
+    flex: 0 0 50%; 
+    width: 50%;
+    height: 100%; 
+    display: flex; 
+    flex-direction: column; 
+    position: relative; 
+    overflow: hidden; 
+    padding-left: 10px; 
+}
+
+.grid-col-left .grid-img { width: 100%; height: 65%; object-fit: cover; display: block; }
+.grid-col-left .col-content { 
+    position: relative; 
+    bottom: auto; 
+    left: auto; 
+    right: auto; 
+    padding: 15px 0 0 0; 
+    height: 35%; 
+    background-color: #000; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: flex-start; 
+}
+.grid-col-left .tiny-padding { padding: 10px 0 0 0 !important; }
+.grid-col-left .meta-info { justify-content: space-between; flex-direction: row-reverse; width: 100%; margin-bottom: 10px; }
+.grid-col-left .meta-category { margin-right: 0; }
+
+.grid-col-right { width: 50%; height: 100%; position: relative; overflow: hidden; padding: 0 66px; }
+.grid-col-right .grid-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.small-headline { font-size: 1.25rem !important; line-height: 1.2; }
+
+/* --- CÁC GRID KHÁC --- */
+.layout-complex-grid-mirrored { height: 100vh; width: 100vw; display: flex; padding: 65px 0 30px; flex-direction: row-reverse; }
+.layout-complex-grid-mirrored .grid-col-left { border-right: none; border-left: 1px solid #000; }
+.layout-complex-grid-mirrored .grid-col-left .grid-img { height: 75%; }
+.layout-complex-grid-mirrored .grid-col-left .col-content { height: 25%; }
+
+.layout-complex-grid-mirrored .grid-sub-col-left { 
+    flex: 0 0 50%; 
+    width: 50%; 
+    padding-right: 10px; 
+}
+.layout-complex-grid-mirrored .grid-sub-col-right { 
+    flex: 0 0 50%; 
+    width: 50%; 
+    padding-left: 10px; 
+}
+
+.layout-boxed-split { 
+    width: 100vw; 
+    height: 100vh; 
+    display: flex; 
+    padding: 105px 66px 40px 66px; 
+    gap: 66px; 
+}
+
+.boxed-col { flex: 1; height: 100%; border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; display: flex; flex-direction: column; justify-content: flex-start; align-items: center; position: relative; gap: 40px; }
+.box-top-wrapper { width: 100%; flex: 1; display: flex; align-items: flex-start; justify-content: center; min-height: 0; overflow: hidden; }
+.boxed-img-aligned { width: 100%; height: 100%; object-fit: cover; display: block; }
+.box-bottom-wrapper { width: 100%; height: auto; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; margin-top: 0; flex-shrink: 0; }
+.boxed-title { font-family: 'Bodoni Moda', serif; font-size: 2.5rem; color: #fff; text-align: center; margin-bottom: 15px; font-weight: 400; }
+.boxed-subtitle { font-family: 'Inter', sans-serif; font-size: 12px; color: #ccc; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 30px; text-align: center; min-height: 1.2em; }
+.boxed-btn { padding: 12px 30px; border: 1px solid rgba(255,255,255,0.4); color: #fff; text-decoration: none; text-transform: uppercase; font-size: 11px; letter-spacing: 2px; transition: 0.3s; flex-shrink: 0; }
+.boxed-btn:hover { background: #fff; color: #000; }
+
+.layout-boxed-wide { width: 100vw; height: auto; display: flex; padding: 105px 66px 40px 66px; }
+.boxed-wide-inner { width: 100%; height: auto; border: 1px solid rgba(255, 255, 255, 0.2); padding: 40px; display: flex; align-items: center; gap: 40px; }
+.boxed-wide-image-wrapper { flex: 0 0 calc(50% - 20px); aspect-ratio: 4 / 3; width: 100%; overflow: hidden; align-self: center; }
+.ratio-2-1 { aspect-ratio: 2 / 1 !important; }
+.boxed-wide-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.boxed-wide-content-wrapper { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.boxed-wide-title { font-family: 'Bodoni Moda', serif; font-size: 3rem; color: #fff; margin-bottom: 30px; font-weight: 400; text-transform: uppercase; letter-spacing: 2px; }
+
+.pre-footer-block {
+    width: 100vw;
+    padding: 140px 0; 
+    background-color: #000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.2); 
+    overflow: hidden;
+}
+
+.scrolling-text-wrapper { width: 100%; overflow: hidden; white-space: nowrap; }
+.scrolling-text-content { display: inline-block; animation: scroll-left 60s linear infinite; }
+.scrolling-text-item {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 40px; 
+    color: #fff;
+    margin-right: 60px;
+    font-weight: 400;
+    text-transform: uppercase;
+    line-height: 1;
+}
+@keyframes scroll-left { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+.pre-footer-nav { display: flex; gap: 0; margin-top: 60px; }
+.footer-nav-item {
+    color: #fff; text-decoration: none;
+    font-size: 12px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    padding: 12px 25px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: none; transition: 0.3s;
+}
+.footer-nav-item:last-child { border-right: 1px solid rgba(255, 255, 255, 0.4); }
+.footer-nav-item:hover { background: #fff; color: #000; }
+
+.footer-links-section { width: 100vw; background-color: #000; display: flex; flex-direction: column; }
+
+.footer-middle-section {
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px 66px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+}
+
+.footer-middle-left { flex: 1; display: flex; justify-content: flex-start; align-items: center; }
+.store-locator-container { display: flex; flex-direction: column; gap: 5px; width: 280px; }
+.store-locator-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; margin-bottom: 5px; color: #fff; }
+.store-locator-input-group { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid rgba(255, 255, 255, 0.5); padding-bottom: 5px; }
+.store-locator-input { background: transparent; border: none; outline: none; color: #fff; font-family: 'Inter', sans-serif; font-size: 11px; width: 80%; letter-spacing: 0.5px; }
+.store-locator-btn { color: #fff; text-transform: uppercase; font-size: 10px; font-weight: 600; letter-spacing: 1px; cursor: pointer; }
+
+.footer-middle-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-logo-img-small {
+    height: 20px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    margin-bottom: 15px; 
+}
+
+.footer-middle-right { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+.allyant-badge { width: 100px; height: auto; filter: invert(1); cursor: pointer; } 
+
+.footer-legal-row {
+    width: 100%; 
+    padding: 25px 66px;
+    display: flex; justify-content: space-between; 
+    align-items: center;
+}
+.footer-menu-bottom { display: flex; gap: 30px; } 
+.footer-legal-item { cursor: pointer; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; font-weight: 600; color: #fff; }
+.language-selector { font-size: 11px; letter-spacing: 0.5px; cursor: pointer; color: #fff; font-weight: 600; text-transform: uppercase; }
+
+.footer-copyright-row {
+    width: 100%; padding: 0 66px 30px 66px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding-top: 25px;
+}
+.copyright-text { font-size: 10px; color: #666; letter-spacing: 0.5px; }
+
+
+/* ==========================================================================
+   RESPONSIVE & MOBILE REPO (ĐƯỢC VIẾT LẠI CHUẨN)
+   ========================================================================== */
+@media screen and (max-width: 1024px) {
+    /* 1. Reset Body & Scrolling */
+    body {
+        overflow-x: hidden;
+        overflow-y: auto; /* Bật cuộn dọc tự nhiên */
+        width: 100%;
+        position: relative;
+    }
+
+    /* 2. Header Mobile */
+    header { padding: 0 15px; }
+    .world-bg-wrapper { display: none; }
+    .logo-img { width: 180px; }
+    .header-right { width: auto; border: none; }
+    .lang, .icon-light { display: none; }
+    .right-item-wrapper { border: none !important; margin-left: 15px; }
+
+    /* 3. Container Reset - Quan trọng: Tắt Transform */
+    #scroller-container {
+        position: relative; /* Trả về luồng document */
+        width: 100%;
+        transform: none !important; 
+        top: 0; 
+        padding-top: 65px; /* Bù cho Header Fixed */
+        height: auto;
+        overflow: visible;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* 4. Horizontal Section -> Vertical Stack */
+    #horizontal-section {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        display: flex;
+    }
+
+    /* Hero Video */
+    .slide-video {
+        width: 100%;
+        height: 75vh; /* Chiều cao vừa phải cho mobile */
+        border-right: none;
+        margin-bottom: 2px;
+    }
+    .hero-text { bottom: 40px; left: 20px; right: 20px; text-align: center; }
+    .big-title { font-size: 2.2rem; margin-bottom: 20px; margin-left: auto; margin-right: auto;}
+
+    /* Split Layouts (2 cột 50-50 desktop -> 1 cột 100% mobile) */
+    .slide-split, .layout-split-style {
+        width: 100%;
+        height: auto;
+        flex-direction: column;
+        display: flex;
+    }
+
+    .w50-col {
+        width: 100%;
+        height: 80vh; 
+        padding: 40px 20px;
+        margin-bottom: 2px;
+    }
+    
+    /* Sửa lại padding riêng cho Hero Image */
+    .special-hero-padding { padding: 0 !important; }
+    .special-hero-content { left: 20px !important; right: 20px !important; padding: 0 20px 40px 20px; }
+
+    .col-content { 
+        left: 0; right: 0; padding: 0 20px 40px 20px; 
+    }
+    .headline { font-size: 1.8rem; }
+
+    /* 5. Vertical Items & Filter */
+    .vertical-item {
+        margin-left: 0;
+        width: 100%;
+        height: auto;
+    }
+
+    .filter-nav { 
+        overflow-x: auto; 
+        flex-wrap: nowrap; 
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+        -webkit-overflow-scrolling: touch; /* Cuộn mượt trên iOS */
+    }
+    .filter-nav::-webkit-scrollbar { display: none; }
+    .base-item { white-space: nowrap; font-size: 12px; padding: 8px 15px; }
+    .filter-wrapper-responsive { padding: 30px 20px 0 20px !important; margin-bottom: 30px !important; }
+
+    /* 6. Layout Bag Style */
+    .layout-bag-style {
+        flex-direction: column;
+        padding: 40px 0;
+    }
+    .bag-left-col, .bag-right-col {
+        width: 100%;
+        padding: 0 20px;
+    }
+    .bag-img-container { margin-bottom: 30px; }
+    .bag-title { font-size: 2rem; }
+
+    /* 7. Complex Grids (Xử lý khó nhất) */
+    .layout-complex-grid, .layout-complex-grid-mirrored {
+        flex-direction: column;
+        height: auto;
+        padding: 20px 0;
+        width: 100%;
+    }
+    .grid-col-left, .grid-col-right {
+        width: 100%;
+        height: auto;
+        border: none !important;
+        padding: 0 20px;
+    }
+    /* Đảo thứ tự hiển thị nếu cần thiết hoặc giữ nguyên stack */
+    .layout-complex-grid-mirrored .grid-col-left { border-left: none; }
+
+    /* Image blocks trong grid */
+    .grid-row-top, .grid-row-bottom {
+        flex: none;
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+        overflow: visible;
+    }
+    .grid-col-left .grid-img, .grid-col-right .grid-img {
+        height: 400px; /* Chiều cao cố định cho ảnh để đẹp hơn */
+        width: 100%;
+    }
+    
+    .grid-col-left .col-content {
+        position: relative;
+        height: auto;
+        padding: 20px 0 30px 0;
+    }
+
+    /* Sub columns (2 ảnh nhỏ) */
+    .grid-row-bottom {
+        flex-direction: row; 
+        gap: 10px;
+        margin-top: 0;
+    }
+    .grid-sub-col-left, .grid-sub-col-right {
+        width: 50%;
+        padding: 0;
+        height: auto;
+    }
+    .grid-sub-col-left .grid-img, .grid-sub-col-right .grid-img {
+        height: 250px !important; /* Ảnh nhỏ hơn */
+    }
+    .tiny-padding { padding-top: 10px !important; }
+    .small-headline { font-size: 1rem !important; }
+
+    /* Xử lý phần ảnh lớn bên phải của grid */
+    .grid-col-right { margin-top: 20px; }
+    .grid-col-right .col-content { 
+        position: relative; 
+        background: #000; 
+        padding: 20px 0; 
+    }
+
+    /* 8. Boxed Layouts */
+    .layout-boxed-split { 
+        padding: 20px; 
+        gap: 20px; 
+        height: auto; 
+        flex-direction: column; 
+    }
+    .boxed-col { 
+        height: auto; 
+        width: 100%; 
+        aspect-ratio: auto;
+        padding: 30px 20px;
+    }
+    .box-top-wrapper { max-height: 300px; }
+    
+    .layout-boxed-wide { padding: 20px; height: auto; }
+    .boxed-wide-inner { 
+        flex-direction: column; 
+        gap: 30px; 
+        padding: 20px; 
+        height: auto;
+    }
+    .boxed-wide-image-wrapper { width: 100%; aspect-ratio: 16/9; flex: none; }
+    .boxed-wide-title { font-size: 2rem; text-align: center; margin-bottom: 20px; }
+    .boxed-wide-content-wrapper { align-items: center; flex: none; width: 100%; }
+
+    /* 9. Footer Responsive */
+    .pre-footer-block { padding: 60px 0; }
+    .scrolling-text-item { font-size: 24px; margin-right: 30px; }
+    .pre-footer-nav { flex-wrap: wrap; justify-content: center; }
+    .footer-nav-item { width: 50%; text-align: center; border-right: 1px solid rgba(255,255,255,0.4); }
+    .footer-nav-item:nth-child(even) { border-right: none; }
+    
+    .footer-middle-section { flex-direction: column; gap: 40px; padding: 40px 20px; }
+    .footer-middle-left, .footer-middle-center, .footer-middle-right { justify-content: center; width: 100%; }
+    .store-locator-container { width: 100%; max-width: 300px; }
+    
+    .footer-legal-row { flex-direction: column; gap: 30px; padding: 20px; text-align: center; }
+    .footer-menu-bottom { flex-wrap: wrap; justify-content: center; gap: 15px; }
+    
+    .footer-copyright-row { padding: 20px; }
+}
