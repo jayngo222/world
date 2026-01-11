@@ -333,7 +333,7 @@ header {
 
 
 /* ==========================================================================
-   RESPONSIVE & MOBILE REPO (ĐƯỢC VIẾT LẠI CHUẨN)
+   RESPONSIVE & MOBILE REPO 
    ========================================================================== */
 @media screen and (max-width: 1024px) {
     /* 1. Reset Body & Scrolling */
@@ -345,14 +345,14 @@ header {
     }
 
     /* 2. Header Mobile */
-    header { padding: 0 15px; }
+    header { padding: 0; }
     .world-bg-wrapper { display: none; }
     .logo-img { width: 180px; }
     .header-right { width: auto; border: none; }
     .lang, .icon-light { display: none; }
     .right-item-wrapper { border: none !important; margin-left: 15px; }
 
-    /* 3. Container Reset - Quan trọng: Tắt Transform */
+    /* 3. Container Reset  */
     #scroller-container {
         position: relative; /* Trả về luồng document */
         width: 100%;
